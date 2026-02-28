@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "node scripts/dev.mjs",
     "build": "node scripts/build.mjs",
+    "package": "node scripts/package.mjs",
     "test": "vitest run",
     "lint": "eslint . --ext .ts,.mjs"
   },
@@ -14,6 +15,7 @@
     "@types/node": "^24.5.2",
     "@typescript-eslint/eslint-plugin": "^8.43.0",
     "@typescript-eslint/parser": "^8.43.0",
+    "archiver": "^7.0.1",
     "esbuild": "^0.25.10",
     "eslint": "^9.35.0",
     "prettier": "^3.6.2",

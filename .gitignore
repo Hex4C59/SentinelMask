@@ -1,4 +1,7 @@
 node_modules/
 dist/
+artifacts/
 coverage/
 *.log
+AGENTS.md
+docs/
