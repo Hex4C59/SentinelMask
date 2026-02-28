@@ -1,0 +1,81 @@
+:root {
+  color-scheme: light;
+  font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: linear-gradient(160deg, #f7f9fc 0%, #eef3ff 100%);
+  color: #1f2a37;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 880px;
+  margin: 24px auto;
+  padding: 0 16px 24px;
+}
+
+h1 {
+  margin: 0 0 16px;
+  font-size: 28px;
+}
+
+h2 {
+  margin: 0 0 12px;
+  font-size: 20px;
+}
+
+.card {
+  background: #ffffff;
+  border: 1px solid #d9e1ec;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 10px 22px rgba(25, 41, 72, 0.08);
+}
+
+.rule-item {
+  display: grid;
+  grid-template-columns: 160px 1fr 1fr 1fr;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+button {
+  border: none;
+  background: #1f4bd8;
+  color: #fff;
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #1738a1;
+}
+
+select,
+input[type="checkbox"] {
+  font-size: 14px;
+}
+
+.logs {
+  background: #0f172a;
+  color: #e2e8f0;
+  border-radius: 8px;
+  padding: 12px;
+  min-height: 160px;
+  white-space: pre-wrap;
+}
+
+.status {
+  min-height: 20px;
+  color: #0b8f41;
+}

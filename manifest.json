@@ -1,0 +1,35 @@
+{
+  "manifest_version": 3,
+  "name": "SentinelMask",
+  "version": "0.1.0",
+  "description": "Pre-send sensitive information masking for web LLM chats.",
+  "permissions": ["storage"],
+  "host_permissions": [
+    "https://chatgpt.com/*",
+    "https://chat.openai.com/*",
+    "https://claude.ai/*",
+    "https://gemini.google.com/*",
+    "https://chat.deepseek.com/*"
+  ],
+  "background": {
+    "service_worker": "background/index.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://chatgpt.com/*",
+        "https://chat.openai.com/*",
+        "https://claude.ai/*",
+        "https://gemini.google.com/*",
+        "https://chat.deepseek.com/*"
+      ],
+      "js": ["content/index.js"],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "options_page": "options/index.html",
+  "action": {
+    "default_title": "SentinelMask"
+  }
+}

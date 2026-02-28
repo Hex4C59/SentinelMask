@@ -1,0 +1,11 @@
+export const GuardErrorCode = {
+  NONE: "NONE",
+  IME_COMPOSING: "IME_COMPOSING",
+  ENGINE_RUNTIME_ERROR: "ENGINE_RUNTIME_ERROR",
+  INPUT_NOT_FOUND: "INPUT_NOT_FOUND",
+  INPUT_WRITE_FAILED: "INPUT_WRITE_FAILED",
+  DETECTION_TIMEOUT: "DETECTION_TIMEOUT",
+  UNKNOWN_SEND_TRIGGER: "UNKNOWN_SEND_TRIGGER"
+} as const;
+
+export type GuardErrorCode = (typeof GuardErrorCode)[keyof typeof GuardErrorCode];

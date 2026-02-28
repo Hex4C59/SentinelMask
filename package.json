@@ -1,0 +1,23 @@
+{
+  "name": "sentinel-mask",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SentinelMask browser extension MVP scaffold.",
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "build": "node scripts/build.mjs",
+    "test": "vitest run",
+    "lint": "eslint . --ext .ts,.mjs"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.1.33",
+    "@types/node": "^24.5.2",
+    "@typescript-eslint/eslint-plugin": "^8.43.0",
+    "@typescript-eslint/parser": "^8.43.0",
+    "esbuild": "^0.25.10",
+    "eslint": "^9.35.0",
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  }
+}
