@@ -1,4 +1,9 @@
-import { isEditableElement, type EditableElement } from "../core/text/input-accessor";
+import {
+  findClosestEditable,
+  findEditableWithin,
+  isEditableElement,
+  type EditableElement
+} from "../core/text/input-accessor";
 import { resolveSiteAdapter } from "./adapters";
 import { runGatewayWithFailSafe } from "./pre-send-gateway";
 
@@ -28,8 +33,8 @@ function resolveEditableFromTarget(target: EventTarget | null): EditableElement 
     return null;
   }
 
-  const direct = target.closest("textarea, [contenteditable='true']");
-  if (direct && isEditableElement(direct)) {
+  const direct = findClosestEditable(target);
+  if (direct) {
     return direct;
   }
 
@@ -42,14 +47,16 @@ function resolveEditableFromTarget(target: EventTarget | null): EditableElement 
 }
 
 function resolveEditableFromForm(form: HTMLFormElement): EditableElement | null {
-  const candidate = form.querySelector("textarea, [contenteditable='true']");
-  if (candidate && isEditableElement(candidate)) {
+  const candidate = findEditableWithin(form);
+  if (candidate) {
     return candidate;
   }
+
   const active = document.activeElement;
   if (isEditableElement(active)) {
     return active;
   }
+
   return null;
 }
 
