@@ -60,6 +60,15 @@ function resolveEditableFromForm(form: HTMLFormElement): EditableElement | null 
   return null;
 }
 
+function resolveEditableFromTriggerElement(element: HTMLElement): EditableElement | null {
+  const adapted = adapter.resolveEditable?.(element);
+  if (adapted) {
+    return adapted;
+  }
+
+  return resolveEditableFromTarget(element);
+}
+
 function replayKeyboardEvent(target: EditableElement, triggerEvent: KeyboardEvent): void {
   withReplay(() => {
     const replayEvent = new KeyboardEvent("keydown", {
@@ -127,7 +136,7 @@ function onClickCapture(event: MouseEvent): void {
     return;
   }
 
-  const editable = resolveEditableFromTarget(rawTarget);
+  const editable = resolveEditableFromTriggerElement(button);
   if (!editable) {
     return;
   }
@@ -235,7 +244,7 @@ function patchProgrammaticSend(): void {
       return nativeClick.apply(this, args);
     }
 
-    const editable = resolveEditableFromTarget(this);
+    const editable = resolveEditableFromTriggerElement(this);
     if (!editable) {
       return nativeClick.apply(this, args);
     }

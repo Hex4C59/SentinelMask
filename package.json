@@ -8,9 +8,12 @@
     "build": "node scripts/build.mjs",
     "package": "node scripts/package.mjs",
     "test": "vitest run",
+    "test:e2e": "node scripts/test-e2e.mjs",
+    "test:e2e:headed": "node scripts/test-e2e.mjs --headed",
     "lint": "eslint . --ext .ts,.mjs"
   },
   "devDependencies": {
+    "@playwright/test": "^1.58.2",
     "@types/chrome": "^0.1.33",
     "@types/node": "^24.5.2",
     "@typescript-eslint/eslint-plugin": "^8.43.0",

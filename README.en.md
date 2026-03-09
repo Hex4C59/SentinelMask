@@ -11,6 +11,7 @@ SentinelMask is a browser extension (Manifest V3) that detects and masks sensiti
 - Risk-based actions: `allow` / `confirm` / `block`
 - Local anonymous logs only (no raw user text)
 - Options page for rule toggles and log view/clear
+- Repeatable Playwright-based browser extension automation tests
 
 ## Supported Sites
 
@@ -79,6 +80,48 @@ Example output:
 
 - `artifacts/sentinelmask-v0.2.0.zip`
 
+## Browser Extension Automation Tests
+
+### Browser setup
+
+The default scripts use Playwright-managed Chromium first, because the command-line flags required for side-loading browser extensions are no longer supported by stable Google Chrome / Microsoft Edge:
+
+```bash
+npm run test:e2e
+```
+
+If Playwright Chromium is not installed yet, install it in a network-enabled environment:
+
+```bash
+npx playwright install chromium
+```
+
+If you really need to pin the browser binary, pass a Chromium executable path explicitly:
+
+```bash
+PLAYWRIGHT_CHROMIUM_EXECUTABLE="/path/to/chromium" npm run test:e2e
+```
+
+Do not point this variable to stable Google Chrome, otherwise the extension may not actually load and the test result can be misleading.
+
+### Run E2E tests
+
+```bash
+# headless mode for CI and quick regression
+npm run test:e2e
+
+# headed mode to observe extension behavior locally
+npm run test:e2e:headed
+```
+
+Current E2E cases automatically:
+
+- build the `dist/` extension directory
+- launch Chromium with the extension preloaded
+- type a phone number on a simulated DeepSeek host page
+- assert that text is masked before submission
+- open the extension options page and verify logs were recorded
+
 ## Load the Extension Locally
 
 ### Chrome / Edge
@@ -102,7 +145,7 @@ background/  # service worker, settings storage, log aggregation
 core/        # rules, masking, risk decision, input abstraction
 options/     # extension options UI
 shared/      # shared types, error codes, message contracts
-tests/       # unit tests (and future integration tests)
+tests/       # unit tests and browser automation tests
 scripts/     # build/dev/package scripts
 ```
 
