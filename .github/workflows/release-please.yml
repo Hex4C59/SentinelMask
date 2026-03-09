@@ -17,11 +17,17 @@ concurrency:
 jobs:
   release-please:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
 
       - name: Run release-please
         id: release
@@ -30,3 +36,37 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           config-file: .release-please-config.json
           manifest-file: .release-please-manifest.json
+
+      - name: Install dependencies
+        if: ${{ steps.release.outputs.release_created == 'true' }}
+        run: npm ci
+
+      - name: Lint
+        if: ${{ steps.release.outputs.release_created == 'true' }}
+        run: npm run lint
+
+      - name: Unit tests
+        if: ${{ steps.release.outputs.release_created == 'true' }}
+        run: npm run test
+
+      - name: Type check
+        if: ${{ steps.release.outputs.release_created == 'true' }}
+        run: npx tsc --noEmit
+
+      - name: Build and package
+        if: ${{ steps.release.outputs.release_created == 'true' }}
+        run: npm run package
+
+      - name: Verify package output
+        if: ${{ steps.release.outputs.release_created == 'true' }}
+        run: ls -lh artifacts/*.zip
+
+      - name: Attach package and install notes to release
+        if: ${{ steps.release.outputs.release_created == 'true' }}
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.release.outputs.tag_name }}
+          files: artifacts/*.zip
+          body_path: .github/release-install-notes.md
+          append_body: true
+          fail_on_unmatched_files: true

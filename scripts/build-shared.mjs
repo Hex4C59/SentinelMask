@@ -1,4 +1,4 @@
-import { mkdirSync, cpSync } from "node:fs";
+import { mkdirSync, cpSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 
 const rootDir = resolve(process.cwd());
@@ -6,12 +6,38 @@ const rootDir = resolve(process.cwd());
 export const outDir = resolve(rootDir, "dist");
 
 const staticFiles = [
-  { from: "manifest.json", to: "manifest.json" },
   { from: "options/index.html", to: "options/index.html" },
   { from: "options/styles.css", to: "options/styles.css" }
 ];
 
+function readJsonFile(path) {
+  return JSON.parse(readFileSync(path, "utf8"));
+}
+
+export function getPackageVersion() {
+  const version = readJsonFile(resolve(rootDir, "package.json")).version;
+
+  if (typeof version !== "string" || !/^\d+(\.\d+){0,3}$/.test(version)) {
+    throw new Error(
+      `Invalid extension version "${String(version)}". Use up to four numeric segments, for example 0.2.0.`
+    );
+  }
+
+  return version;
+}
+
+function copyManifestFile() {
+  const manifest = readJsonFile(resolve(rootDir, "manifest.json"));
+  manifest.version = getPackageVersion();
+
+  const targetPath = resolve(outDir, "manifest.json");
+  mkdirSync(dirname(targetPath), { recursive: true });
+  writeFileSync(targetPath, `${JSON.stringify(manifest, null, 2)}\n`);
+}
+
 export function copyStaticFiles() {
+  copyManifestFile();
+
   for (const item of staticFiles) {
     const from = resolve(rootDir, item.from);
     const to = resolve(outDir, item.to);

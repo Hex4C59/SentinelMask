@@ -20,7 +20,28 @@ SentinelMask is a browser extension (Manifest V3) that detects and masks sensiti
 - `gemini.google.com`
 - `chat.deepseek.com`
 
-## Quick Start
+## Install for End Users
+
+If you only want to install the extension, go to GitHub Releases and download the packaged asset named `sentinelmask-vX.Y.Z.zip`.
+Do not download GitHub's auto-generated `Source code (zip)` or `Source code (tar.gz)` assets. They are source archives and cannot be installed as a browser extension directly.
+
+### Chrome / Edge
+
+1. Download `sentinelmask-vX.Y.Z.zip`
+2. Unzip the archive
+3. Open `chrome://extensions` or `edge://extensions`
+4. Enable Developer Mode
+5. Click "Load unpacked"
+6. Select the unzipped directory
+
+### Firefox (Temporary Add-on)
+
+1. Download and unzip `sentinelmask-vX.Y.Z.zip`
+2. Open `about:debugging#/runtime/this-firefox`
+3. Click "Load Temporary Add-on"
+4. Select `manifest.json` inside the unzipped directory
+
+## Developer Quick Start
 
 ### Requirements
 
@@ -56,7 +77,7 @@ npm run package
 
 Example output:
 
-- `artifacts/sentinelmask-v0.1.0.zip`
+- `artifacts/sentinelmask-v0.2.0.zip`
 
 ## Load the Extension Locally
 
