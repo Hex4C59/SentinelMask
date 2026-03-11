@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.2](https://github.com/Hex4C59/SentinelMask/compare/v0.2.1...v0.2.2) (2026-03-11)
+
+
+### Bug Fixes
+
+* 完善 DeepSeek 适配并稳定 E2E 验证 ([c978271](https://github.com/Hex4C59/SentinelMask/commit/c978271875d4fad5e442b6d71c67c50d7193974f))
+* 完善 DeepSeek 适配并稳定 E2E 验证 ([b2d3eda](https://github.com/Hex4C59/SentinelMask/commit/b2d3edaad9098d483a5032e54785b700ffbdb094))
+
 ## [0.2.1](https://github.com/Hex4C59/SentinelMask/compare/v0.2.0...v0.2.1) (2026-03-09)
 
 
