@@ -2,6 +2,10 @@ node_modules/
 dist/
 artifacts/
 coverage/
+.playwright-extension-profile/
+.playwright-extension-profile-debug/
+playwright-report/
+test-results/
 *.log
 AGENTS.md
 docs/
